@@ -33,35 +33,67 @@ bool estadosM[8][4] = {
     {1,0,0,1}
 };
 
-void pasoC(int Pasos){
-    while (Pasos){
-        for (int i = 0; i < Pasos; i++){
+void pasoC(int pasos){
+    while (pasos){
+        for (int i = 0; i < pasos; i++){
             for (int j = 0; j < 4; j++){
                 PTA -> PSOR|=(estadosC[j][i % 4]<<pines[j]);
             }
         }
-        Pasos--;
+        pasos--;
     }
 }
 
-void pasoN(int Pasos){
-    while (Pasos){
-        for (int i = 0; i < Pasos; i++){
+void pasoN(int pasos){
+    while (pasos){
+        for (int i = 0; i < pasos; i++){
             for (int j = 0; j < 4; j++){
                 PTA -> PSOR|=(estadosN[j][i % 4]<<pines[j]);
             }
         }
-        Pasos--;
+        pasos--;
     }
 }
 
-void pasoM(int Pasos){
-    while (Pasos){
-        for (int i = 0; i < Pasos; i++){
+void pasoM(int pasos){
+    while (pasos){
+        for (int i = 0; i < pasos; i++){
             for (int j = 0; j < 4; j++){
                 PTA -> PSOR|=(estadosM[j][i % 8]<<pines[j]);
             }
         }
-        Pasos--;
+        pasos--;
     }
+}
+
+void pasoNMC(char mode, int pasos){
+    if (mode == 'm'){
+        while (pasos){
+            for (int i = 0; i < pasos; i++){
+                for (int j = 0; j < 4; j++){
+                    PTA -> PSOR|=(estadosM[j][i % 8]<<pines[j]);
+                }
+            }
+            pasos--;
+        }
+    }else if (mode == 'n'){
+        while (pasos){
+            for (int i = 0; i < pasos; i++){
+                for (int j = 0; j < 4; j++){
+                    PTA -> PSOR|=(estadosN[j][i % 4]<<pines[j]);
+                }
+            }
+        pasos--;
+        }
+    }else if(mode == 'c'){
+        while (pasos){
+        for (int i = 0; i < pasos; i++){
+            for (int j = 0; j < 4; j++){
+                PTA -> PSOR|=(estadosC[j][i % 4]<<pines[j]);
+            }
+        }
+        pasos--;
+    }
+    }
+    
 }
